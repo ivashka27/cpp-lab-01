@@ -1,13 +1,12 @@
-#include <iostream>
-
-// Прочитать n, затем n целых чисел.
-// Напечатать сумму, минимум, максимум и число строго положительных.
-// Формат вывода уже собран ниже, менять его не нужно.
-// n в тестах всегда >= 0. При n == 0 чисел дальше нет.
+#include <cstdio>
+#include <io.h>
+#include <fcntl.h>
 
 int main() {
+    _setmode(_fileno(stdout), _O_BINARY);
+    
     int n = 0;
-    if (!(std::cin >> n)) {
+    if (!(scanf("%d", &n) == 1)) {
         return 0;
     }
 
@@ -19,24 +18,37 @@ int main() {
 
     for (int i = 0; i < n; ++i) {
         int value = 0;
-        std::cin >> value;
+        scanf("%d", &value);
 
-        // TODO: обновите sum, positive, min_value, max_value и has_value.
-        // positive считает числа строго больше нуля.
-        // Ноль и отрицательные в positive не входят.
-        // min и max существуют только после первого числа: смотрите на has_value.
-        // sum копите в long long: три числа 1000000000 в int не влезают.
-        (void)value;
+        sum += value;
+        
+        if (value > 0) {
+            positive++;
+        }
+        
+        if (!has_value) {
+            min_value = value;
+            max_value = value;
+            has_value = true;
+        } else {
+            if (value < min_value) {
+                min_value = value;
+            }
+            if (value > max_value) {
+                max_value = value;
+            }
+        }
     }
 
-    std::cout << "sum: " << sum << '\n';
+    printf("sum: %lld\n", sum);
     if (!has_value) {
-        std::cout << "min: none\n";
-        std::cout << "max: none\n";
+        printf("min: none\n");
+        printf("max: none\n");
     } else {
-        std::cout << "min: " << min_value << '\n';
-        std::cout << "max: " << max_value << '\n';
+        printf("min: %d\n", min_value);
+        printf("max: %d\n", max_value);
     }
-    std::cout << "positive: " << positive << '\n';
+    printf("positive: %d\n", positive);
+    
     return 0;
 }
