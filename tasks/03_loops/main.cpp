@@ -14,19 +14,30 @@ int main() {
     long long sum = 0;
     int positive = 0;
     bool has_value = false;
-    int min_value = 0;
-    int max_value = 0;
+    int min_value = 1000000000;
+    int max_value = -1000000000;
 
     for (int i = 0; i < n; ++i) {
         int value = 0;
         std::cin >> value;
+        has_value = true;
+        sum += value;
 
         // TODO: обновите sum, positive, min_value, max_value и has_value.
         // positive считает числа строго больше нуля.
         // Ноль и отрицательные в positive не входят.
         // min и max существуют только после первого числа: смотрите на has_value.
         // sum копите в long long: три числа 1000000000 в int не влезают.
-        (void)value;
+        if (value > 0) {
+          positive += 1;
+        }
+
+        if (value < min_value) {
+          min_value = value;
+        }
+        if (value > max_value) {
+          max_value = value;
+        }
     }
 
     std::cout << "sum: " << sum << '\n';
