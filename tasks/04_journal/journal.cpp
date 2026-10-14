@@ -50,16 +50,13 @@ double Average(long long sum, int count) {
 
 std::string Verdict(int count, int passed, int min_score) {
     if (count == 0) {
-        return "no scores";
+        return "empty";
     }
-    if (passed == count) {
-        return "all passed";
+    if (passed != count) {
+        return "debt";
     }
-    if (passed == 0) {
-        return "all failed";
+    if (min_score >= 90) {
+        return "excellent";
     }
-    if (min_score < 60) {
-        return "some failed";
-    }
-    return "some passed";
+    return "ok";
 }
