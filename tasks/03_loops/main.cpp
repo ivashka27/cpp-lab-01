@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <cmath>
 // Прочитать n, затем n целых чисел.
 // Напечатать сумму, минимум, максимум и число строго положительных.
 // Формат вывода уже собран ниже, менять его не нужно.
@@ -26,7 +26,16 @@ int main() {
         // Ноль и отрицательные в positive не входят.
         // min и max существуют только после первого числа: смотрите на has_value.
         // sum копите в long long: три числа 1000000000 в int не влезают.
-        (void)value;
+        sum += value;
+        if (i == 0) {
+            min_value = value;
+            max_value = value;
+        }
+
+        min_value = std::min(min_value, value);
+        max_value = std::max(max_value, value);
+        has_value = true;
+        if (value > 0) positive +=1;
     }
 
     std::cout << "sum: " << sum << '\n';
@@ -40,3 +49,4 @@ int main() {
     std::cout << "positive: " << positive << '\n';
     return 0;
 }
+

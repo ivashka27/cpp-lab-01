@@ -1,48 +1,55 @@
 #include "journal.hpp"
-
+#include <cmath>
 // Этот файл нужно реализовать.
 // Сигнатуры в journal.hpp менять нельзя.
 
 bool IsValidScore(int score) {
-    (void)score;
-    return false;
+    if (score >=0 and score <= 100) {
+        return true;
+    }
+    else return false;
 }
 
 long long AddToSum(long long sum, int score) {
-    (void)sum;
-    (void)score;
-    return 0;
+    return sum + (long long) score;
 }
 
 int NextMin(bool has_score, int current_min, int score) {
-    (void)has_score;
-    (void)current_min;
-    (void)score;
+    if (has_score == false) {
+        return score;
+    }
+    else return std::min(current_min, score);
     return 0;
 }
 
 int NextMax(bool has_score, int current_max, int score) {
-    (void)has_score;
-    (void)current_max;
-    (void)score;
+    if (has_score == false) {
+        return score;
+    }
+    else return std::max(current_max, score);
     return 0;
 }
 
 int NextPassed(int passed, int score) {
-    (void)passed;
-    (void)score;
-    return 0;
+    if (score >= 60) {
+        return (passed+=1);
+    }
+    else return passed;
 }
 
 double Average(long long sum, int count) {
-    (void)sum;
-    (void)count;
-    return 0;
+    return (double) sum/count;
 }
 
 std::string Verdict(int count, int passed, int min_score) {
-    (void)count;
-    (void)passed;
-    (void)min_score;
-    return "";
+    if (count == 0) {
+        return "empty";
+    }
+    if (passed != count) {
+        return "debt";
+    }
+    if (min_score >= 90) {
+        return "excellent";
+    }
+    else return "ok";
 }
