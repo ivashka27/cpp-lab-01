@@ -4,19 +4,6 @@
 #include <iostream>
 #include <string>
 
-// Каркас уже читает имя и число баллов и печатает отчёт.
-// Нужно дописать две проверки и тело цикла.
-// Функции лежат в journal.cpp.
-//
-// Вход:
-//   <имя из одного слова>
-//   <n>
-//   затем n целых баллов
-//
-// При n < 0 программа печатает ровно одну строку `invalid count` и возвращает 1.
-// При балле вне 0..100 печатает ровно `invalid score` и возвращает 1.
-// Отчёт в этих двух случаях печатать нельзя.
-
 int main() {
     std::string name;
     int n = 0;
@@ -25,7 +12,8 @@ int main() {
     }
 
     if (n < 0) {
-        // TODO: напечатать invalid count и завершить программу с кодом 1.
+        std::cout << "invalid count\n";
+        return 1;
     }
 
     long long sum = 0;
@@ -36,18 +24,20 @@ int main() {
 
     for (int i = 0; i < n; ++i) {
         int score = 0;
-        std::cin >> score;
+        if (!(std::cin >> score)) {
+            return 0;
+        }
 
-        // TODO:
-        // 1. Если !IsValidScore(score), напечатать invalid score и вернуть 1.
-        // 2. sum = AddToSum(...)
-        // 3. min_score = NextMin(has_score, ...)
-        //    max_score = NextMax(has_score, ...)
-        //    Эти две функции вызывайте, пока has_score ещё false для первого балла.
-        // 4. passed = NextPassed(...)
-        // 5. has_score = true
-        (void)score;
-        (void)has_score;
+        if (!IsValidScore(score)) {
+            std::cout << "invalid score\n";
+            return 1;
+        }
+
+        sum = AddToSum(sum, score);
+        min_score = NextMin(has_score, min_score, score);
+        max_score = NextMax(has_score, max_score, score);
+        passed = NextPassed(passed, score);
+        has_score = true;
     }
 
     const int count = n;
@@ -56,6 +46,7 @@ int main() {
     std::cout << "name: " << name << '\n';
     std::cout << "count: " << count << '\n';
     std::cout << "sum: " << sum << '\n';
+
     if (count == 0) {
         std::cout << "average: n/a\n";
         std::cout << "min: n/a\n";
@@ -66,8 +57,10 @@ int main() {
         std::cout << "min: " << min_score << '\n';
         std::cout << "max: " << max_score << '\n';
     }
+
     std::cout << "passed: " << passed << '\n';
     std::cout << "failed: " << failed << '\n';
     std::cout << "verdict: " << Verdict(count, passed, min_score) << '\n';
+
     return 0;
 }
