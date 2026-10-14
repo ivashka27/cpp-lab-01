@@ -1,5 +1,6 @@
 #include <iostream>
 
+
 // Прочитать n, затем n целых чисел.
 // Напечатать сумму, минимум, максимум и число строго положительных.
 // Формат вывода уже собран ниже, менять его не нужно.
@@ -17,16 +18,27 @@ int main() {
     int min_value = 0;
     int max_value = 0;
 
+
     for (int i = 0; i < n; ++i) {
         int value = 0;
         std::cin >> value;
-
-        // TODO: обновите sum, positive, min_value, max_value и has_value.
-        // positive считает числа строго больше нуля.
-        // Ноль и отрицательные в positive не входят.
-        // min и max существуют только после первого числа: смотрите на has_value.
-        // sum копите в long long: три числа 1000000000 в int не влезают.
-        (void)value;
+        sum += value;
+        if (value > 0){
+            positive++;
+        }
+        if (!has_value){
+            has_value = true;
+            min_value = value;
+            max_value = value;
+        }else{
+            if (value < min_value){
+                min_value = value;
+            }
+            if (value > max_value){
+                max_value = value;
+            }
+        }
+       
     }
 
     std::cout << "sum: " << sum << '\n';
