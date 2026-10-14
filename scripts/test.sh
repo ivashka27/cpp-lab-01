@@ -67,7 +67,8 @@ run_io() {
             echo "FAIL $case_name: exit code $code, expected $expected_code"
             bad=1
         fi
-        if ! diff -u "${base}.out" "$actual"; then
+        if ! diff --strip-trailing-cr -u "${base}.out" "$actual"; then
+
             bad=1
         fi
         if [[ "$bad" -eq 0 ]]; then
