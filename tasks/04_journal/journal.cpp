@@ -4,45 +4,35 @@
 // Сигнатуры в journal.hpp менять нельзя.
 
 bool IsValidScore(int score) {
-    (void)score;
-    return false;
+    return score >= 0 && score <= 100;
 }
 
 long long AddToSum(long long sum, int score) {
-    (void)sum;
-    (void)score;
-    return 0;
+    return sum + score;
 }
 
 int NextMin(bool has_score, int current_min, int score) {
-    (void)has_score;
-    (void)current_min;
-    (void)score;
-    return 0;
+    if (!has_score) return score;
+    return score < current_min ? score : current_min;
 }
 
 int NextMax(bool has_score, int current_max, int score) {
-    (void)has_score;
-    (void)current_max;
-    (void)score;
-    return 0;
+    if (!has_score) return score;
+    return score > current_max ? score : current_max;
 }
 
 int NextPassed(int passed, int score) {
-    (void)passed;
-    (void)score;
-    return 0;
+    return score >= 60 ? passed + 1 : passed;
 }
 
 double Average(long long sum, int count) {
-    (void)sum;
-    (void)count;
-    return 0;
+    if (count == 0) return 0.0;
+    return static_cast<double>(sum) / count;
 }
 
 std::string Verdict(int count, int passed, int min_score) {
-    (void)count;
-    (void)passed;
-    (void)min_score;
-    return "";
+    if (count == 0) return "empty";
+    if (passed != count) return "debt";
+    if (min_score >= 90) return "excellent";
+    return "ok";
 }
