@@ -1,27 +1,22 @@
 #include "types.hpp"
+#include <climits>
 
 // Этот файл нужно реализовать.
 // Сигнатуры в types.hpp менять нельзя.
 
 int DivideInts(int a, int b) {
-    (void)a;
-    (void)b;
-    return 0;
+    return a / b;
 }
 
 double DivideAsDouble(int a, int b) {
-    (void)a;
-    (void)b;
-    return 0;
+    return a * 1.0 / b;
 }
 
 bool FitsInInt(long long value) {
-    (void)value;
-    return false;
+    return value >= INT_MIN && value <= INT_MAX;
 }
 
 long long SumAsLongLong(int a, int b) {
-    (void)a;
-    (void)b;
-    return 0;
+    long long result = a;
+    return result + b;
 }
