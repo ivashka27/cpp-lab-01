@@ -20,7 +20,17 @@ int main() {
     for (int i = 0; i < n; ++i) {
         int value = 0;
         std::cin >> value;
-
+        sum = sum + value;
+        if(value>0) positive++;
+        if(has_value == false){
+            min_value = value;
+            max_value = value;
+            has_value = true;
+        }
+        else {
+            if(value<min_value) min_value = value;
+            if(value>max_value) max_value = value;
+        }
         // TODO: обновите sum, positive, min_value, max_value и has_value.
         // positive считает числа строго больше нуля.
         // Ноль и отрицательные в positive не входят.
